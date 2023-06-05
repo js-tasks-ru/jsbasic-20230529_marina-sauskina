@@ -1,16 +1,14 @@
-/**
- * Эту функцию трогать не нужно
- */
 function print(text) {
   console.log(text);
 }
 
-/**
- * Эту функцию нужно поменять так,
- * чтобы функция sayHello работала корректно
- */
+// function checks if name provided is valid(not empty; no spaces; length > 4; ) returns boolean;
 function isValid(name) {
-  // ваш код...
+  if (name !== null) {
+    return !(name.length < 4 || name.includes(" "));
+  } else {
+    return false;
+  }
 }
 
 function sayHello() {
