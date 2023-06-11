@@ -1,3 +1,6 @@
+// function of maping names
+// @param: users - array of objects with property name.
 function namify(users) {
-  // ваш код...
+  return users.map(user => user.name);
 }
+
