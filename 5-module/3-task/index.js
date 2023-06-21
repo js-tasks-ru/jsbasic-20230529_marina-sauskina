@@ -1,34 +1,35 @@
-let index = 0;
+// function for a slider to show/hide side-arrows and turn slides on click.
 function initCarousel() {
-  const carousel = document.querySelector('.carousel');
-  const carouselArrowLeft = carousel.querySelector('.carousel__arrow_left');
-  const carouselArrowRight = carousel.querySelector('.carousel__arrow_right');
-  const carouselInner = carousel.querySelector('.carousel__inner');
-  const divInnerWidth = carouselInner.offsetWidth;
+  const carousel = document.querySelector('.carousel'); // main div <div class="carousel">
+  let inner = carousel.querySelector('.carousel__inner');
+  let slides = inner.querySelectorAll('.carousel__slide');
+  let leftArrow = carousel.querySelector('.carousel__arrow_left');
+  let rightArrow = carousel.querySelector('.carousel__arrow_right');
+  let slideWidth = slides[0].offsetWidth; // width of one slide, found via offSetWidth
+  let currentSlide = 0;
+  let lastSlide = slides.length - 1;
 
-  carouselArrowLeft.style.display = 'none';
+  leftArrow.style.display = 'none';
 
+  function moveSlide(direction) {
+    currentSlide += direction;
+    inner.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
 
-  carouselArrowLeft.addEventListener('click', ()=>{
-    carouselInner.setAttribute("style", `transform: translateX(-${divInnerWidth * --index }px)`);
-    arrowCheck();
-  });
-
-  carouselArrowRight.addEventListener('click', ()=>{
-    index++;
-    carouselInner.setAttribute("style", `transform: translateX(-${divInnerWidth * index}px)`);
-    arrowCheck();
-  });
-
-  function arrowCheck() {
-    if (index === 0) {
-      carouselArrowLeft.style.display = 'none';
-    } else if (index === 3) {
-      carouselArrowRight.style.display = 'none';
+    if (currentSlide === 0) {
+      leftArrow.style.display = 'none';
+    } else if (currentSlide === lastSlide) {
+      rightArrow.style.display = 'none';
     } else {
-      carouselArrowLeft.style.display = '';
-      carouselArrowRight.style.display = '';
-}
-}
+      leftArrow.style.display = '';
+      rightArrow.style.display = '';
+    }
+  }
 
+  leftArrow.addEventListener('click', () => {
+    moveSlide(-1);
+  });
+
+  rightArrow.addEventListener('click', () => {
+    moveSlide(1);
+  });
 }
