@@ -6,7 +6,7 @@ function highlight(table) {
     } else if (row.cells[3].getAttribute("data-available") === "false") {
       row.classList.add('unavailable');
     } else {
-      row.setAttribute("hidden", "true");
+      row.hidden = true;
     }
     if (row.cells[2].textContent === "m") {
       row.classList.add('male');
